@@ -45,4 +45,4 @@ class DataGenerator(object):
                                         )
 ```
 
-
+**Note**: The shuffle parameter should be set to False.
