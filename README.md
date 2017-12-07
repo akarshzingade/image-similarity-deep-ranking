@@ -6,7 +6,7 @@ This repository is based on [this](https://medium.com/@akarshzingade/image-simil
 
 For this implementation of Deep Ranking model, we need a image generator that would read from a text file which contains the triplets and then generate the images from those. The ImageDataGeneratorCustom.py contains the code that does this.
 
-## DeepRanking.py
+## deepRanking.py
 
 The Deep Ranking model consists of a ConvNet, 2 parallel small networks and a ranking loss function.
 
