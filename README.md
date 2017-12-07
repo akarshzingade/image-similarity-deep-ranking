@@ -1,10 +1,10 @@
 # Image Similarity using Deep Ranking
 
-This repository is based on [this](https://medium.com/@akarshzingade/image-similarity-using-deep-ranking-c1bd83855978) blog. 
+This repository is based on [this](https://medium.com/@akarshzingade/image-similarity-using-deep-ranking-c1bd83855978) blog. Please refer it to understand how Deep Ranking works.  
 
 ## ImageDataGeneratorCustom.py
 
-In this case, we need a custom image generator that would read from a text file which contains the triplets and then generate the images from those. The ImageDataGeneratorCustom.py contains the code that does this.
+For this implementation of Deep Ranking model, we need a image generator that would read from a text file which contains the triplets and then generate the images from those. The ImageDataGeneratorCustom.py contains the code that does this.
 
 ## DeepRanking.py
 
