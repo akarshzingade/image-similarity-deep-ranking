@@ -882,7 +882,7 @@ def _list_valid_filenames_in_directory(directory, white_list_formats,
             if is_valid:
                 classes.append(class_indices[subdir])
                 # add filename relative to directory
-                absolute_path = os.path.join(root, fname)
+                absolute_path = fname#os.path.join(root, fname)
                 filenames.append(os.path.relpath(absolute_path, basedir))
             else:
                 print (fname+" is not valid")
@@ -991,7 +991,7 @@ class DirectoryIterator(Iterator):
         results = []
 
         self.filenames = []
-        self.classes = np.zeros((self.samples,), dtype='int32')
+        self.classes = np.zeros((self.samples*3,), dtype='int32')
         i = 0
         for dirpath in (os.path.join(directory, subdir) for subdir in classes):
             results.append(pool.apply_async(_list_valid_filenames_in_directory,
@@ -999,8 +999,8 @@ class DirectoryIterator(Iterator):
                                              self.class_indices, follow_links,triplet_path)))
         for res in results:
             classes, filenames = res.get()
-            self.classes = np.zeros((len(filenames),), dtype='int32')
-            self.classes[i:i + len(classes)] = classes
+            #self.classes = np.zeros((len(filenames),), dtype='int32')
+            #self.classes[i:i + len(classes)] = classes
             self.filenames += filenames
             i += len(classes)
         pool.close()
