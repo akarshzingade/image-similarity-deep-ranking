@@ -46,3 +46,16 @@ class DataGenerator(object):
 ```
 
 **Note**: The shuffle parameter should be set to False.
+
+## tripletSampler.py
+
+This is the triplet sampling method that I have implemented as I have described in my [blog](https://medium.com/@akarshzingade/image-similarity-using-deep-ranking-c1bd83855978). 
+
+It takes 4 inputs- Input directory where the images are present, Output directory where the generated triplet text file is to be stored, the number of positive images for each query image, and number of negative images for each query image. 
+
+Here's an example of how to pass these information to the script:
+
+```
+Format: python triplet_sampler.py --input_directory <<path to the directory>> --output_directory <<path to the directory>> --num_pos_images <<Number of positive images you want>> --num_neg_images <<Number of negative images you want>>
+
+Example: python triplet_sampler.py --input_directory similarity_images --output_directory triplet_folder --num_pos_images 10 --num_neg_images 50```
