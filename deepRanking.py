@@ -1,44 +1,21 @@
 # coding: utf-8
 
-
-
 from  __future__ import absolute_import
 from __future__ import print_function
-
-
-import os
-import shutil
-
+from ImageDataGeneratorCustom import ImageDataGeneratorCustom
 import numpy as np
 from keras.applications.vgg16 import VGG16
-from keras.callbacks import ModelCheckpoint
 from keras.layers import *
 from keras.models import Model, load_model
 from keras.optimizers import SGD
-from keras.callbacks import BaseLogger, TensorBoard, CSVLogger
-from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing.image import load_img, img_to_array
-from skimage import transform
 import tensorflow as tf
-from keras.backend.tensorflow_backend import set_session
-import numpy as np
-from keras import objectives
 from keras import backend as K
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-from skimage.transform import resize
-from keras.layers import Embedding
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth=True
 sess = tf.Session(config=config)
 K.set_session(sess)
-
-
-from ImageDataGeneratorCustom import ImageDataGeneratorCustom
-
-
 
 def convnet_model_():
     vgg_model = VGG16(weights=None, include_top=False)
@@ -154,6 +131,6 @@ deep_rank_model.fit_generator(train_generator,
 
 model_path = "deepranking.h5"
 deep_rank_model.save_weights(model_path)
-f = open('deepranking.json','w')
-f.write(deep_rank_model.to_json())
-f.close()
+#f = open('deepranking.json','w')
+#f.write(deep_rank_model.to_json())
+#f.close()
