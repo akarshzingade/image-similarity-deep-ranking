@@ -991,7 +991,7 @@ class DirectoryIterator(Iterator):
         results = []
 
         self.filenames = []
-        self.classes = np.zeros((self.samples*3,), dtype='int32')
+        self.classes = np.zeros((batch_size,), dtype='int32')
         i = 0
         for dirpath in (os.path.join(directory, subdir) for subdir in classes):
             results.append(pool.apply_async(_list_valid_filenames_in_directory,
@@ -1046,7 +1046,7 @@ class DirectoryIterator(Iterator):
             batch_y = self.classes[index_array].astype(K.floatx())
         elif self.class_mode == 'categorical':
             batch_y = np.zeros((len(batch_x), self.num_class), dtype=K.floatx())
-            for i, label in enumerate(self.classes[index_array]):
+            for i, label in enumerate(self.classes):
                 batch_y[i, label] = 1.
         else:
             return batch_x
