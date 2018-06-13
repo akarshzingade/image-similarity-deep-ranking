@@ -118,7 +118,7 @@ def _loss_tensor(y_true, y_pred):
     zero = tf.constant(0.0, shape=[1], dtype=tf.float32)
     return tf.maximum(loss,zero)
 
-deep_rank_model.load_weights('deepranking.h5')
+#deep_rank_model.load_weights('deepranking.h5')
 deep_rank_model.compile(loss=_loss_tensor, optimizer=SGD(lr=0.001, momentum=0.9, nesterov=True))
 
 
