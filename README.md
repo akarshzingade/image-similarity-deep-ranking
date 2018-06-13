@@ -76,3 +76,11 @@ Format: python deepranking_get_distance.py --model <<path to the model>> --image
 ```
 Example: python deepranking_get_distance.py --model ./deepranking.h5 --image1 ./image1.jpg --image2 ./image2.jpg
 ```
+
+## Known Issues
+
+```
+Issue: IndexError Out of Bounds.
+
+Hacky Fix: Please ensure that the number of triplets in the triplets.txt is a multiple of (3 * batch_size).
+```
