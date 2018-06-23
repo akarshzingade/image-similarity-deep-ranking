@@ -77,6 +77,17 @@ Format: python deepranking_get_distance.py --model <<path to the model>> --image
 Example: python deepranking_get_distance.py --model ./deepranking.h5 --image1 ./image1.jpg --image2 ./image2.jpg
 ```
 
+## Ideas to compare your test image with your training data
+
+For image search, you will have to compute the distance between the source image and all the images in the dataset. But, there are ways to optimise this search. One way is to
+
+1) Cluster all the dataset image embeddings and store the cluster means.
+2) Compare the source image embeddings with the cluster means.
+3) Select the closest cluster.
+4) Compare the source image embeddings with the dataset images belonging to the selected cluster.
+
+You can also create hierarchical clusters to further optimise it.
+
 ## Known Issues
 
 ```
