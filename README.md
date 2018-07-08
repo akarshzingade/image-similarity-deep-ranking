@@ -62,6 +62,21 @@ Format: python triplet_sampler.py --input_directory <<path to the directory>> --
 ```
 Example: python triplet_sampler.py --input_directory similarity_images --output_directory triplet_folder --num_pos_images 10 --num_neg_images 50
 ```
+
+For your custom dataset, you will have to segregate similar images to different folders. The structure of your dataset will be as follows:
+
+```
+dataset/
+|__SimilarityClass1/
+|    |__Image1.jpg, Image2.jpg and so on....
+|
+|__SimilarityClass2/
+|    |_Image1.jpg, Image2.jpg and so on....
+|
+and so on...
+```
+Then, run the tripletSampler.py script on this folder.
+
 ## How to get the similarity distance between two images?
 
 The "deepranking_get_distance.py" calculates the similarity distance between the two images and prints it out. The script takes 3 inputs:
