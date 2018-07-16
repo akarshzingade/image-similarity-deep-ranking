@@ -15,6 +15,7 @@ import threading
 import warnings
 import multiprocessing.pool
 from functools import partial
+import pickle
 
 import keras.backend as K
 
@@ -988,21 +989,32 @@ class DirectoryIterator(Iterator):
         print('Found %d images belonging to %d classes.' % (self.samples, self.num_class))
 
         # second, build an index of the images in the different class subfolders
+        # added reference to pickle so once loaded everything should go faster
         results = []
-
         self.filenames = []
-        self.classes = np.zeros((batch_size,), dtype='int32')
+        self.classes = np.zeros((self.samples*3,), dtype='int32')
         i = 0
-        for dirpath in (os.path.join(directory, subdir) for subdir in classes):
-            results.append(pool.apply_async(_list_valid_filenames_in_directory,
-                                            (dirpath, white_list_formats,
-                                             self.class_indices, follow_links,triplet_path)))
-        for res in results:
-            classes, filenames = res.get()
-            #self.classes = np.zeros((len(filenames),), dtype='int32')
-            #self.classes[i:i + len(classes)] = classes
-            self.filenames += filenames
-            i += len(classes)
+
+        print('trying to import pickle file if exists...')
+
+        try:
+            with open('delete_if_new_data_source.pkl', 'rb') as f:
+                self.filenames, i = pickle.load(f)
+        except (OSError, IOError) as e:
+            print('No pickle file available, this might take a while to generate...')
+            for dirpath in (os.path.join(directory, subdir) for subdir in classes):
+                results.append(pool.apply_async(_list_valid_filenames_in_directory,
+                                                (dirpath, white_list_formats,
+                                                self.class_indices, follow_links,triplet_path)))
+            for res in results:
+                classes, filenames = res.get()
+                #self.classes = np.zeros((len(filenames),), dtype='int32')
+                #self.classes[i:i + len(classes)] = classes
+                self.filenames += filenames
+                i += len(classes)
+            # Saving the objects:
+            with open('delete_if_new_data_source.pkl', 'wb') as f:
+                pickle.dump([self.filenames, i], f)
         pool.close()
         pool.join()
         super(DirectoryIterator, self).__init__(self.samples, batch_size, shuffle, seed,triplet_path)
