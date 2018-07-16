@@ -992,7 +992,7 @@ class DirectoryIterator(Iterator):
         # added reference to pickle so once loaded everything should go faster
         results = []
         self.filenames = []
-        self.classes = np.zeros((self.samples*3,), dtype='int32')
+        self.classes = np.zeros((batch_size,), dtype='int32')
         i = 0
 
         print('trying to import pickle file if exists...')
