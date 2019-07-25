@@ -107,7 +107,7 @@ if __name__ == '__main__':
             quit()
 
     if not os.path.exists(args.output_directory):
-            print (args.input_directory+" path does not exist!")
+            print (args.output_directory+" path does not exist!")
             quit()
 
     print ("Input Directory: "+args.input_directory)
